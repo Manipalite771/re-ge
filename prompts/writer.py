@@ -1,0 +1,123 @@
+"""Prompt for Step 4: Resume Writer — generates the full resume content."""
+
+WRITER_PROMPT = """You are an expert resume writer. Using the strategy and knowledge base, write a complete, polished resume.
+
+<strategy>
+{strategy}
+</strategy>
+
+<knowledge_base>
+{knowledge_base}
+</knowledge_base>
+
+<jd_analysis>
+{jd_analysis}
+</jd_analysis>
+
+Write the full resume as a JSON object with this structure:
+
+{{
+  "header": {{
+    "name": "TANMAY TIWARI",
+    "target_title": "The headline from the strategy",
+    "location": "Bangalore, India",
+    "phone": "+91-9620506316",
+    "email": "tanmay771@gmail.com",
+    "linkedin": "linkedin.com/in/tanmay-tiwari-lifesciences"
+  }},
+  "summary": "A 3-5 line professional summary. Must sell the director hypothesis in seconds. Include scope, outcomes, and leadership themes. Mirror JD keywords naturally.",
+  "signature_achievements": [
+    "3-5 standalone achievement bullets with metrics. These appear before the experience section."
+  ],
+  "competencies": [
+    "8-12 competency phrases in a single line, pipe-separated"
+  ],
+  "experience": [
+    {{
+      "company": "INDEGENE INC.",
+      "title": "Senior Manager, GenAI Strategy",
+      "location": "Bangalore, India",
+      "dates": "May 2021 - Present",
+      "progression": "Associate Manager (May 2021-Sep 2023) > Manager (Oct 2023-Dec 2025) > Senior Manager (Jan 2026-Present)",
+      "scope_line": "One line establishing scope: team size, budget, portfolio, stakeholders",
+      "bullets": [
+        "10-15 impact bullets following the formula: Action (strategic decision) + scope + mechanism + outcome + stakeholder context. Each must be specific, quantified where possible, and framed at director level."
+      ]
+    }},
+    {{
+      "company": "NOVARTIS INDIA",
+      "title": "Medical Representative (Institutional Sales / Key Accounts)",
+      "location": "Hyderabad, India",
+      "dates": "Apr 2017 - May 2019",
+      "scope_line": null,
+      "bullets": ["1-3 bullets based on strategy emphasis"]
+    }},
+    {{
+      "company": "JOHNSON & JOHNSON LTD.",
+      "title": "Medical Sales Representative (OTC / Territory Growth)",
+      "location": "Bangalore, India",
+      "dates": "Mar 2016 - Apr 2017",
+      "scope_line": null,
+      "bullets": ["1-2 bullets if included per strategy"]
+    }},
+    {{
+      "company": "INTAS PHARMACEUTICALS",
+      "title": "Field Sales Officer (Cardio-diabetic Portfolio)",
+      "location": "Mangalore, India",
+      "dates": "Jul 2014 - Jul 2015",
+      "scope_line": null,
+      "bullets": ["1 bullet if included per strategy"]
+    }}
+  ],
+  "earlier_experience_summary": "A ONE-LINE bridge statement accounting for experience years not covered by the detailed roles above. REQUIRED when the summary says ~10 years but only ~6 years are detailed. Example: 'Earlier: Institutional sales and territory growth roles at Novartis India, Johnson & Johnson, and Intas Pharmaceuticals (2014-2019), building deep pharma commercial and field operations expertise.' This must cover the companies, years, and a brief theme. Set to null ONLY if all career years are already detailed above.",
+  "early_career": [
+    "Optional early career entries (Myntra, ManipalBlog) if strategy includes them"
+  ],
+  "volunteering": {{
+    "org": "CWF CAMBODIA",
+    "role": "Teacher",
+    "location": "Phnom Penh, KH",
+    "dates": "Dec 2015 - Feb 2016",
+    "bullet": "One line if included per strategy"
+  }},
+  "education": [
+    {{
+      "institution": "NMIMS Mumbai",
+      "degree": "MBA, Marketing",
+      "dates": "Jun 2019 - Mar 2021",
+      "gpa": "CGPA 3.59/4; Dean's Merit List (Top 5%)",
+      "highlights": ["Selected highlights per strategy"]
+    }},
+    {{
+      "institution": "Manipal University",
+      "degree": "B.Pharm",
+      "dates": "Jul 2009 - Jun 2014",
+      "gpa": "CGPA 6.77/10",
+      "highlights": ["Selected highlights per strategy"]
+    }}
+  ],
+  "achievements_and_tools": {{
+    "achievements": ["Selected achievements per strategy"],
+    "tools": ["Selected tools per strategy"]
+  }}
+}}
+
+CRITICAL RULES:
+1. NEVER mention the target company name (from the JD) anywhere in the resume.
+2. Every bullet must be specific and evidence-based — draw from the knowledge base, not generic filler.
+3. Use strong action verbs that convey director-level agency: Led, Set, Established, Defined, Built, Drove, Owned, Transformed, Scaled, Aligned.
+4. Quantify everything possible: percentages, dollar amounts, team sizes, timeframes.
+5. Keep bullets concise (1-2 lines each). Do NOT trim content to fit pages — font scaling handles page fitting automatically.
+6. Mirror JD keywords in context — never stuff.
+7. The Indegene experience should show clear progression and increasing scope.
+8. Omit roles or sections that the strategy marks for exclusion.
+9. EARLIER EXPERIENCE BRIDGE (MANDATORY): If the professional summary claims ~9-10 years of experience but only the recent ~5-6 years are detailed with bullets, you MUST include "earlier_experience_summary" — a single-line bridge that names the earlier companies, date range, and a thematic summary. This prevents a visible gap between claimed years and detailed roles. Example: "Earlier: Institutional sales and territory growth roles at Novartis India, Johnson & Johnson, and Intas Pharmaceuticals (2014–2019), building pharma commercial domain expertise across respiratory, OTC, and cardio-diabetic portfolios."
+10. The professional summary can say "~10 years" if that is accurate based on total career span."""
+
+
+def build_writer_prompt(strategy: str, knowledge_base: str, jd_analysis: str) -> str:
+    return WRITER_PROMPT.format(
+        strategy=strategy,
+        knowledge_base=knowledge_base,
+        jd_analysis=jd_analysis,
+    )

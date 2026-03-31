@@ -1,0 +1,12 @@
+venv/
+__pycache__/
+*.pyc
+.env
+*.db
+output/
+*.pdf
+*.docx
+.streamlit/
+worker.log
+*.log
+nohup.out
