@@ -18,7 +18,8 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy app code
+# Copy app code (bust cache on code changes)
+ARG CACHEBUST=1
 COPY . .
 
 # Create dirs for persistent data
