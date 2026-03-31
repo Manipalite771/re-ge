@@ -86,6 +86,13 @@ def process_job(job: dict):
 def main():
     """Main worker loop — polls for pending jobs."""
     init_db()
+
+    # Startup credential check
+    from config import AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION, ANTHROPIC_MODEL
+    print(f"[Worker] AWS_ACCESS_KEY_ID: {'SET (' + AWS_ACCESS_KEY_ID[:6] + '...)' if AWS_ACCESS_KEY_ID else 'MISSING'}")
+    print(f"[Worker] AWS_SECRET_ACCESS_KEY: {'SET' if AWS_SECRET_ACCESS_KEY else 'MISSING'}")
+    print(f"[Worker] AWS_REGION: {AWS_REGION}")
+    print(f"[Worker] ANTHROPIC_MODEL: {ANTHROPIC_MODEL}")
     print("[Worker] Background worker started. Polling for jobs...")
 
     while True:
