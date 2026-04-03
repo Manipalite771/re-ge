@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Option C — Full-Width Banner Header with Photo</title>
+    <style>
+        @page { size: letter; margin: 0; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 9.5pt; line-height: 1.32; color: #1a1a1a; }
+
+        /* ── Banner header ── */
+        .banner {
+            background: #1b4f72;
+            color: #fff;
+            padding: 16pt 28pt;
+            display: flex;
+            align-items: center;
+            gap: 18pt;
+        }
+
+        .banner .profile-photo {
+            width: 72pt;
+            height: 72pt;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2.5pt solid rgba(255,255,255,0.35);
+            flex-shrink: 0;
+        }
+
+        .banner-text { flex: 1; }
+
+        .banner h1 {
+            font-size: 17pt;
+            font-weight: 800;
+            letter-spacing: 3pt;
+            text-transform: uppercase;
+            margin-bottom: 2pt;
+        }
+
+        .banner .target-title {
+            font-size: 9.5pt;
+            font-weight: 400;
+            color: #d4e6f1;
+            letter-spacing: 0.3pt;
+            margin-bottom: 6pt;
+        }
+
+        .banner .contact-bar {
+            font-size: 8pt;
+            color: #a9cce3;
+        }
+
+        .banner .contact-bar .sep::before { content: "   |   "; }
+
+        /* ── Body content ── */
+        .content {
+            padding: 10pt 28pt 18pt 28pt;
+        }
+
+        h2 {
+            font-size: 9pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5pt;
+            color: #1b4f72;
+            border-bottom: 1.5pt solid #d4e6f1;
+            padding-bottom: 2pt;
+            margin-top: 8pt;
+            margin-bottom: 4pt;
+        }
+
+        .icon { font-size: 6pt; color: #5dade2; margin-right: 3pt; vertical-align: middle; }
+
+        .summary { font-size: 9pt; line-height: 1.4; color: #444; }
+
+        .competency-grid { display: flex; flex-wrap: wrap; gap: 3pt; margin-top: 2pt; }
+        .comp-tag {
+            font-size: 8pt; color: #1b4f72; background: #eaf2f8;
+            border: 0.5pt solid #d4e6f1; border-radius: 2pt;
+            padding: 1pt 5pt; white-space: nowrap; font-weight: 500;
+        }
+
+        .role { margin-bottom: 6pt; }
+        .role-header { display: flex; justify-content: space-between; align-items: baseline; }
+        .company { font-weight: 700; font-size: 9.5pt; color: #1b4f72; }
+        .dates { font-size: 8.5pt; color: #777; white-space: nowrap; }
+        .role-subheader { display: flex; justify-content: space-between; align-items: baseline; }
+        .title { font-style: italic; font-size: 9pt; color: #444; }
+        .location { font-size: 8pt; color: #777; }
+        .progression { font-size: 7.5pt; color: #777; font-style: italic; margin: 1pt 0; }
+        .scope { font-size: 8.5pt; font-weight: 600; color: #1b4f72; background: #f7fbfe; border-left: 2pt solid #5dade2; padding: 2pt 5pt; margin: 2pt 0; }
+
+        ul { margin-left: 13pt; margin-top: 1pt; }
+        li { font-size: 9pt; line-height: 1.3; margin-bottom: 1.5pt; }
+        li::marker { color: #5dade2; }
+    </style>
+</head>
+<body>
+    <!-- DARK BANNER with photo + name -->
+    <div class="banner">
+        <img src="Picture.jpg" alt="Photo" class="profile-photo">
+        <div class="banner-text">
+            <h1>Tanmay Tiwari</h1>
+            <p class="target-title">Senior Manager, GenAI Strategy & Health Tech</p>
+            <div class="contact-bar">
+                <span>Bangalore, India</span>
+                <span class="sep"></span>
+                <span>+91-9620506316</span>
+                <span class="sep"></span>
+                <span>tanmay771@gmail.com</span>
+                <span class="sep"></span>
+                <span>linkedin.com/in/tanmay-tiwari-lifesciences</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Body -->
+    <div class="content">
+        <h2><span class="icon">&#9670;</span> Professional Summary</h2>
+        <p class="summary">Results-driven senior manager with ~10 years of experience spanning life sciences commercial strategy, health technology, and GenAI product delivery. Currently leading AI-powered content and engagement platforms at Indegene, driving measurable outcomes for top-10 pharma clients. Combines deep pharma domain expertise with hands-on technical leadership in LLM deployment, MLOps, and cross-functional team scaling.</p>
+
+        <h2><span class="icon">&#9670;</span> Key Achievements</h2>
+        <ul>
+            <li>Built and launched GenAI content platform adopted by 3 top-10 pharma companies, reducing review cycles by 40%</li>
+            <li>Scaled cross-functional AI team from 4 to 14 members across engineering, strategy, and medical affairs</li>
+            <li>Drove $2.8M incremental revenue through AI-enabled service offerings in 18 months</li>
+        </ul>
+
+        <h2><span class="icon">&#9670;</span> Core Competencies</h2>
+        <div class="competency-grid">
+            <span class="comp-tag">GenAI Strategy</span>
+            <span class="comp-tag">Health Tech</span>
+            <span class="comp-tag">Product Management</span>
+            <span class="comp-tag">MLOps</span>
+            <span class="comp-tag">Omnichannel</span>
+            <span class="comp-tag">Stakeholder Mgmt</span>
+            <span class="comp-tag">Team Leadership</span>
+            <span class="comp-tag">Life Sciences</span>
+            <span class="comp-tag">Digital Transformation</span>
+        </div>
+
+        <h2><span class="icon">&#9670;</span> Professional Experience</h2>
+        <div class="role">
+            <div class="role-header">
+                <span class="company">INDEGENE INC.</span>
+                <span class="dates">May 2021 - Present</span>
+            </div>
+            <div class="role-subheader">
+                <span class="title">Senior Manager, GenAI Strategy</span>
+                <span class="location">Bangalore, India</span>
+            </div>
+            <p class="progression">Associate Manager (May 2021) > Manager (Oct 2023) > Senior Manager (Jan 2026)</p>
+            <p class="scope">Leading GenAI strategy and delivery for 5 enterprise pharma accounts; managing cross-functional team of 14</p>
+            <ul>
+                <li>Led <strong>end-to-end GenAI platform</strong> development across 3 therapeutic areas, driving <strong>40% reduction in content review cycles</strong></li>
+                <li>Built and scaled a <strong>cross-functional team of 12</strong> engineers and strategists to deliver <strong>MLOps infrastructure</strong> serving 5 enterprise clients</li>
+                <li>Defined <strong>omnichannel content strategy</strong> for top-5 pharma account, increasing <strong>HCP engagement by 35%</strong></li>
+                <li>Architected <strong>RAG-based medical content pipeline</strong> with automated compliance checks, cutting regulatory submission time by 60%</li>
+                <li>Established <strong>AI governance framework</strong> adopted across the business unit, aligning with FDA and EMA digital health guidance</li>
+            </ul>
+        </div>
+
+        <div class="role">
+            <div class="role-header">
+                <span class="company">NOVARTIS INDIA</span>
+                <span class="dates">Apr 2017 - May 2019</span>
+            </div>
+            <div class="role-subheader">
+                <span class="title">Medical Representative (Institutional Sales)</span>
+                <span class="location">Hyderabad, India</span>
+            </div>
+            <ul>
+                <li>Managed key institutional accounts across 15+ hospitals, achieving 120% of annual sales targets</li>
+            </ul>
+        </div>
+
+        <h2><span class="icon">&#9670;</span> Education</h2>
+        <div class="role">
+            <div class="role-header">
+                <span class="company">NMIMS Mumbai</span>
+                <span class="dates">Jun 2019 - Mar 2021</span>
+            </div>
+            <div class="role-subheader">
+                <span class="title">MBA, Marketing</span>
+                <span class="location">CGPA 3.59/4; Dean's Merit List</span>
+            </div>
+        </div>
+        <div class="role">
+            <div class="role-header">
+                <span class="company">Manipal University</span>
+                <span class="dates">Jul 2009 - Jun 2014</span>
+            </div>
+            <div class="role-subheader">
+                <span class="title">B.Pharm</span>
+                <span class="location">CGPA 6.77/10</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

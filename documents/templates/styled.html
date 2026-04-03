@@ -5,29 +5,28 @@
     <link rel="stylesheet" href="styled.css">
 </head>
 <body>
-    <div class="resume">
-        <!-- Header -->
-        <header>
-            <div class="header-content">
-                <img src="Picture.jpg" alt="Photo" class="profile-photo">
-                <div class="header-text">
-                    <h1>{{ header.name }}</h1>
-                    <p class="target-title">{{ header.target_title }}</p>
-                    <div class="contact-bar">
-                        <span>{{ header.location }}</span>
-                        <span class="sep"></span>
-                        <span>{{ header.phone }}</span>
-                        <span class="sep"></span>
-                        <span>{{ header.email }}</span>
-                        {% if header.linkedin %}
-                        <span class="sep"></span>
-                        <span>{{ header.linkedin }}</span>
-                        {% endif %}
-                    </div>
-                </div>
+    <!-- Banner header with photo -->
+    <div class="banner">
+        <img src="Picture.jpg" alt="Photo" class="profile-photo">
+        <div class="banner-text">
+            <h1>{{ header.name }}</h1>
+            <p class="target-title">{{ header.target_title }}</p>
+            <div class="contact-bar">
+                <span>{{ header.location }}</span>
+                <span class="sep"></span>
+                <span>{{ header.phone }}</span>
+                <span class="sep"></span>
+                <span>{{ header.email }}</span>
+                {% if header.linkedin %}
+                <span class="sep"></span>
+                <span>{{ header.linkedin }}</span>
+                {% endif %}
             </div>
-        </header>
+        </div>
+    </div>
 
+    <!-- Body content -->
+    <div class="content">
         <!-- Professional Summary -->
         <section>
             <h2><span class="section-icon">&#9670;</span> Professional Summary</h2>

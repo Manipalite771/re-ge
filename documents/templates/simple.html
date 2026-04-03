@@ -5,22 +5,21 @@
     <link rel="stylesheet" href="simple.css">
 </head>
 <body>
-    <div class="resume">
-        <!-- Header -->
-        <header>
-            <div class="header-content">
-                <img src="Picture.jpg" alt="Photo" class="profile-photo">
-                <div class="header-text">
-                    <h1>{{ header.name }}</h1>
-                    <p class="target-title">{{ header.target_title }}</p>
-                    <p class="contact">
-                        {{ header.location }} | {{ header.phone }} | {{ header.email }}
-                        {% if header.linkedin %} | {{ header.linkedin }}{% endif %}
-                    </p>
-                </div>
-            </div>
-        </header>
+    <!-- Banner header with photo -->
+    <div class="banner">
+        <img src="Picture.jpg" alt="Photo" class="profile-photo">
+        <div class="banner-text">
+            <h1>{{ header.name }}</h1>
+            <p class="target-title">{{ header.target_title }}</p>
+            <p class="contact">
+                {{ header.location }} | {{ header.phone }} | {{ header.email }}
+                {% if header.linkedin %} | {{ header.linkedin }}{% endif %}
+            </p>
+        </div>
+    </div>
 
+    <!-- Body content -->
+    <div class="content">
         <!-- Professional Summary -->
         <section>
             <h2>Professional Summary</h2>
