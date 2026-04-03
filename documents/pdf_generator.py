@@ -8,6 +8,7 @@ from pathlib import Path
 
 import fitz  # PyMuPDF — used only to count pages
 import jinja2
+from markupsafe import Markup
 import weasyprint
 
 from config import TEMPLATES_DIR, OUTPUT_DIR
@@ -15,7 +16,7 @@ from config import TEMPLATES_DIR, OUTPUT_DIR
 
 def _bold_md(text):
     """Convert **text** markdown bold to <strong> tags."""
-    return jinja2.Markup(re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', str(text)))
+    return Markup(re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', str(text)))
 
 MAX_PAGES = 2
 SCALE_START = 1.0

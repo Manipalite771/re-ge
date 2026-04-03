@@ -5,6 +5,7 @@ from pathlib import Path
 
 import fitz  # PyMuPDF — for page counting
 import jinja2
+from markupsafe import Markup
 import weasyprint
 from docx import Document
 from docx.shared import Pt, Inches, RGBColor
@@ -15,7 +16,7 @@ from config import OUTPUT_DIR, TEMPLATES_DIR
 
 def _bold_md(text):
     """Convert **text** markdown bold to <strong> tags."""
-    return jinja2.Markup(re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', str(text)))
+    return Markup(re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', str(text)))
 
 
 def _add_heading_styled(doc: Document, text: str, level: int = 1):
