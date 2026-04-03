@@ -32,6 +32,26 @@ header {
     border-bottom: 2.5pt solid var(--accent);
 }
 
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 12pt;
+}
+
+.profile-photo {
+    width: 58pt;
+    height: 58pt;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2pt solid var(--accent-light);
+    flex-shrink: 0;
+}
+
+.header-text {
+    flex: 1;
+    text-align: center;
+}
+
 h1 {
     font-size: calc(17pt * var(--scale));
     font-weight: 800;

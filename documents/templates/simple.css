@@ -26,6 +26,25 @@ header {
     border-bottom: 2pt solid #333;
 }
 
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 12pt;
+}
+
+.profile-photo {
+    width: 58pt;
+    height: 58pt;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.header-text {
+    flex: 1;
+    text-align: center;
+}
+
 h1 {
     font-size: calc(16pt * var(--scale));
     font-weight: 800;

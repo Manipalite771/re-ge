@@ -112,7 +112,19 @@ CRITICAL RULES:
 7. The Indegene experience should show clear progression and increasing scope.
 8. Omit roles or sections that the strategy marks for exclusion.
 9. EARLIER EXPERIENCE BRIDGE (MANDATORY): If the professional summary claims ~9-10 years of experience but only the recent ~5-6 years are detailed with bullets, you MUST include "earlier_experience_summary" — a single-line bridge that names the earlier companies, date range, and a thematic summary. This prevents a visible gap between claimed years and detailed roles. Example: "Earlier: Institutional sales and territory growth roles at Novartis India, Johnson & Johnson, and Intas Pharmaceuticals (2014–2019), building pharma commercial domain expertise across respiratory, OTC, and cardio-diabetic portfolios."
-10. The professional summary can say "~10 years" if that is accurate based on total career span."""
+10. The professional summary can say "~10 years" if that is accurate based on total career span.
+
+BOLD KEY PHRASES IN INDEGENE BULLETS (MANDATORY):
+For INDEGENE ONLY, wrap the most JD-relevant phrases within each bullet in **double asterisks** for bold rendering.
+- Bold specific phrases WITHIN sentences, NOT the entire bullet. Target 2-5 words per bold span.
+- Pick the parts a hiring manager scanning for JD fit would want to see jump out: technology names, methodologies, quantified outcomes, domain terms, leadership scope.
+- Aim for 1-3 bold spans per bullet. Not every bullet needs bold — only where it genuinely highlights JD alignment.
+- Examples of good bolding:
+  - "Led **end-to-end GenAI platform** development across 3 therapeutic areas, driving **40% reduction in content review cycles**"
+  - "Built and scaled a **cross-functional team of 12** engineers and strategists to deliver **MLOps infrastructure** serving 5 enterprise clients"
+  - "Defined **omnichannel content strategy** for top-5 pharma account, increasing **HCP engagement by 35%** across digital touchpoints"
+- Do NOT bold generic verbs, prepositions, or filler. Bold the substance — the thing that proves JD fit.
+- Do NOT apply bold to bullets in other roles (Novartis, J&J, Intas, etc.) — Indegene only."""
 
 
 def build_writer_prompt(strategy: str, knowledge_base: str, jd_analysis: str) -> str:

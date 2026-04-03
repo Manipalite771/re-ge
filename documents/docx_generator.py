@@ -1,5 +1,6 @@
 """Generate styled resume as PDF (via WeasyPrint) and optionally as DOCX."""
 
+import re
 from pathlib import Path
 
 import fitz  # PyMuPDF — for page counting
@@ -10,6 +11,11 @@ from docx.shared import Pt, Inches, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 
 from config import OUTPUT_DIR, TEMPLATES_DIR
+
+
+def _bold_md(text):
+    """Convert **text** markdown bold to <strong> tags."""
+    return jinja2.Markup(re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', str(text)))
 
 
 def _add_heading_styled(doc: Document, text: str, level: int = 1):
@@ -228,6 +234,7 @@ def generate_styled_pdf(resume_content: dict, filename: str = "resume_styled.pdf
         loader=jinja2.FileSystemLoader(str(TEMPLATES_DIR)),
         autoescape=True,
     )
+    env.filters["bold_md"] = _bold_md
     template = env.get_template("styled.html")
     html_content = template.render(**resume_content)
 

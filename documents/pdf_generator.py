@@ -3,6 +3,7 @@
 Includes dynamic font scaling to guarantee the resume fits within 2 pages.
 """
 
+import re
 from pathlib import Path
 
 import fitz  # PyMuPDF — used only to count pages
@@ -10,6 +11,11 @@ import jinja2
 import weasyprint
 
 from config import TEMPLATES_DIR, OUTPUT_DIR
+
+
+def _bold_md(text):
+    """Convert **text** markdown bold to <strong> tags."""
+    return jinja2.Markup(re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', str(text)))
 
 MAX_PAGES = 2
 SCALE_START = 1.0
@@ -41,6 +47,7 @@ def generate_simple_pdf(resume_content: dict, filename: str = "resume_simple.pdf
         loader=jinja2.FileSystemLoader(str(TEMPLATES_DIR)),
         autoescape=True,
     )
+    env.filters["bold_md"] = _bold_md
     template = env.get_template("simple.html")
     html_content = template.render(**resume_content)
 
