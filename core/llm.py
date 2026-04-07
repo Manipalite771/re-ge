@@ -82,13 +82,28 @@ def call_llm_json(
     system_prompt: str = "",
     temperature: float = 0.0,
     max_tokens: int = MAX_TOKENS,
+    retries: int = 2,
 ) -> dict:
-    """Make an LLM call and parse the response as JSON."""
-    text = call_llm(
-        user_prompt=user_prompt,
-        system_prompt=system_prompt,
-        temperature=temperature,
-        max_tokens=max_tokens,
-        response_format="json",
-    )
-    return json.loads(text)
+    """Make an LLM call and parse the response as JSON.
+
+    Retries up to `retries` times on empty or unparseable responses.
+    """
+    last_error = None
+    for attempt in range(1 + retries):
+        text = call_llm(
+            user_prompt=user_prompt,
+            system_prompt=system_prompt,
+            temperature=temperature,
+            max_tokens=max_tokens,
+            response_format="json",
+        )
+        if not text or not text.strip():
+            last_error = ValueError(f"LLM returned empty response (attempt {attempt + 1})")
+            continue
+        try:
+            return json.loads(text)
+        except json.JSONDecodeError as e:
+            last_error = e
+            continue
+
+    raise last_error or ValueError("LLM returned empty response after all retries")
