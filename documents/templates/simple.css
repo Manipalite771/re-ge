@@ -18,7 +18,7 @@
     --bullet-gap: 1pt;
     --role-gap: 5pt;
     --photo-size: 82pt;
-    --nav-width: 26pt;
+    --nav-width: 38pt;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -54,7 +54,7 @@ body {
     padding: var(--content-padding-v) var(--content-padding-h) 18pt var(--content-padding-h);
 }
 
-/* ── Right navigation panel (vertical text, full page height) ── */
+/* ── Right navigation panel (rotated text, full page height) ── */
 .nav-panel {
     width: var(--nav-width);
     display: flex;
@@ -66,24 +66,33 @@ body {
 
 .nav-item {
     flex: 1;
-    writing-mode: vertical-rl;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: calc(5.5pt * var(--scale));
-    color: #ccc;
-    text-transform: uppercase;
-    letter-spacing: 0.8pt;
-    line-height: 1;
+    overflow: visible;
     background: #fafafa;
     border-left: 2.5pt solid transparent;
 }
 
+.nav-text {
+    display: inline-block;
+    transform: rotate(90deg);
+    white-space: nowrap;
+    font-size: calc(5pt * var(--scale));
+    color: #ccc;
+    text-transform: uppercase;
+    letter-spacing: 0.5pt;
+    line-height: 1;
+}
+
 .nav-item.active {
+    background: #f0f0f0;
+    border-left-color: #333;
+}
+
+.nav-item.active .nav-text {
     color: #333;
     font-weight: 700;
-    border-left-color: #333;
-    background: #f0f0f0;
 }
 
 /* ── Banner header ── */
