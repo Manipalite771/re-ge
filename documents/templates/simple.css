@@ -8,7 +8,7 @@
     --base-font-size: 9.5pt;
     --scale: 1;
     /* Tunable layout variables (adjusted by CSS QA fixer) */
-    --career-graph-max-height: 180pt;
+    --career-graph-max-height: 210pt;
     --content-padding-v: 10pt;
     --content-padding-h: 28pt;
     --banner-padding-v: 16pt;
@@ -18,7 +18,7 @@
     --bullet-gap: 1pt;
     --role-gap: 5pt;
     --photo-size: 72pt;
-    --nav-width: 52pt;
+    --nav-width: 26pt;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -54,34 +54,36 @@ body {
     padding: var(--content-padding-v) var(--content-padding-h) 18pt var(--content-padding-h);
 }
 
-/* ── Right navigation panel ── */
+/* ── Right navigation panel (vertical text, full page height) ── */
 .nav-panel {
     width: var(--nav-width);
     display: flex;
     flex-direction: column;
-    justify-content: center;
     gap: 0;
     border-left: 0.5pt solid #e5e5e5;
-    background: #fafafa;
     flex-shrink: 0;
 }
 
 .nav-item {
-    padding: 16pt 5pt;
-    font-size: calc(6pt * var(--scale));
-    text-align: center;
+    flex: 1;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(5.5pt * var(--scale));
     color: #ccc;
     text-transform: uppercase;
-    letter-spacing: 0.4pt;
-    line-height: 1.35;
-    border-left: 2.5pt solid transparent;
-    margin-left: -0.5pt; /* overlap the panel border */
+    letter-spacing: 0.8pt;
+    line-height: 1;
+    background: #fafafa;
+    border-right: 2.5pt solid transparent;
 }
 
 .nav-item.active {
     color: #333;
     font-weight: 700;
-    border-left-color: #333;
+    border-right-color: #333;
     background: #f0f0f0;
 }
 

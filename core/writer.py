@@ -34,8 +34,25 @@ def write_resume(
     if qa_fix_instructions:
         prompt += f"\n\n{qa_fix_instructions}"
 
-    return call_llm_json(
+    result = call_llm_json(
         user_prompt=prompt,
         system_prompt=SYSTEM_PROMPT,
         temperature=0.3,
     )
+
+    # Safeguard: if Indegene bullets are empty, retry once with explicit instruction
+    experience = result.get("experience", [])
+    if experience and len(experience[0].get("bullets", [])) < 3:
+        retry_prompt = prompt + (
+            "\n\nCRITICAL RETRY: Your previous output had ZERO or very few bullets "
+            "in the Indegene experience entry. This is a fatal error — Page 2 of the "
+            "resume is completely blank. You MUST generate 12-15 detailed impact bullets "
+            "for the Indegene role. This is the most important section of the resume."
+        )
+        result = call_llm_json(
+            user_prompt=retry_prompt,
+            system_prompt=SYSTEM_PROMPT,
+            temperature=0.3,
+        )
+
+    return result

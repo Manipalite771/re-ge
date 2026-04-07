@@ -112,9 +112,12 @@ CRITICAL RULES:
 
 3-PAGE LAYOUT RULES:
 - Page 1 (The Snapshot): header + summary + career graph (embedded as image, not generated) + key achievements + core competencies. Keep the summary to 3-5 lines and achievements to 3-5 bullets so everything fits on page 1.
-- Page 2 (The Deep Dive): ONLY the Indegene experience. This is a full dedicated page — write 12-15 rich, JD-relevant bullets. This is where the hiring manager validates the snapshot.
-- Page 3 (The Full Picture): All other roles (Novartis, J&J, Intas), education, volunteering, early career, achievements & tools. Keep these condensed.
+- Page 2 (The Deep Dive): ONLY the Indegene experience. This is a full dedicated page.
+- Page 3 (Career & Credentials): All other roles (Novartis, J&J, Intas), education, volunteering, early career, achievements & tools. Keep these condensed.
 - The Indegene role MUST be the FIRST entry in the "experience" array. Other roles follow after it.
+
+CRITICAL — INDEGENE BULLETS (NON-NEGOTIABLE):
+The experience[0] entry (Indegene) MUST contain a "bullets" array with EXACTLY 12-15 bullet points. This is the single most important section of the entire resume — it fills the entire Page 2. An empty or missing bullets array is a FATAL ERROR. Each bullet must be a complete, quantified impact statement drawn from the knowledge base. DO NOT leave the Indegene bullets array empty under any circumstances.
 6. Mirror JD keywords in context — never stuff. IMPORTANT: Mirroring keywords means using JD language to DESCRIBE real KB experiences. It does NOT mean copying JD requirements and presenting them as accomplishments. Bad: "Developed enterprise data strategy aligned to business outcomes" (copied from JD). Good: "Defined GenAI content strategy for top-5 pharma account, reducing review cycles by 40%" (real KB experience, framed in JD language).
 7. The Indegene experience should show clear progression and increasing scope.
 8. Omit roles or sections that the strategy marks for exclusion.

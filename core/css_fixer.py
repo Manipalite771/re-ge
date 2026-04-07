@@ -7,7 +7,7 @@ from prompts.css_fixer import build_css_fixer_prompt
 
 # Default CSS variable values (must match what's in simple.css / styled.css)
 DEFAULT_CSS_VARS = {
-    "--career-graph-max-height": "180pt",
+    "--career-graph-max-height": "210pt",
     "--content-padding-v": "10pt",
     "--content-padding-h": "28pt",
     "--banner-padding-v": "16pt",
@@ -17,7 +17,7 @@ DEFAULT_CSS_VARS = {
     "--bullet-gap": "1pt",
     "--role-gap": "5pt",
     "--photo-size": "72pt",
-    "--nav-width": "52pt",
+    "--nav-width": "26pt",
 }
 
 
