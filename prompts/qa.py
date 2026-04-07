@@ -30,13 +30,14 @@ Check for ALL of the following:
 - Are any bullet points awkwardly broken across pages? (page breaks are explicit — content should not overflow between the 3 sections)
 - Is the professional summary visible in the top third of page 1?
 - Is the career graph image visible and properly sized on page 1?
-- Do pages 2 and 3 have their section headers ("The Deep Dive" / "The Full Picture")?
-- Are any sections missing or empty?
+- There is a narrow right-side navigation panel on every page — this is INTENTIONAL and should NOT be flagged as a layout issue. It shows three vertical labels ("Profile Snapshot", "The Deep Dive", "Career & Credentials") with the current page highlighted. Do NOT penalize this.
+- The career graph image on page 1 is a FIXED ASSET (a skill architecture visualization). It is intentionally included and should NOT be flagged as unusual or problematic. Only flag it if it's missing, broken, or severely misaligned.
+- Are any sections missing or empty? CRITICAL: Page 2 MUST have Indegene bullet points. If page 2 shows only a header/scope but no bullets, that is a critical content failure.
 - Are there any encoding artifacts or garbled characters?
 - Is the contact information complete and legible?
 
 ## ATS Concerns (Simple Variant Only)
-- Is the layout truly single-column? (No side-by-side elements that could confuse ATS)
+- The main content area is single-column. The narrow right nav panel is a decorative sidebar and does NOT affect ATS parsing of the main content.
 - Are section headings standard and clear?
 
 Return a JSON object:

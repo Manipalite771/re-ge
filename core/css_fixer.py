@@ -71,7 +71,11 @@ def generate_css_fixes(qa_simple: dict, qa_styled: dict, current_vars: dict | No
 
     # Call LLM to generate CSS fixes
     prompt = build_css_fixer_prompt(current_vars, qa_feedback)
-    overrides = call_llm_json(prompt, temperature=0.0)
+    try:
+        overrides = call_llm_json(prompt, temperature=0.0)
+    except Exception:
+        # If LLM returns empty/unparseable response, skip CSS fixes gracefully
+        return ""
 
     if not overrides:
         return ""
