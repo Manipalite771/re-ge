@@ -11,7 +11,7 @@ Check for ALL of the following:
 ## Layout & Formatting
 - The resume uses a 3-PAGE LAYOUT with explicit page breaks: Page 1 = Snapshot (banner, summary, career graph image, achievements, competencies), Page 2 = Deep Dive (Indegene experience only), Page 3 = Full Picture (past experience, education, etc.). Exactly 3 pages is expected.
 - Is page 1 complete? (banner + summary + career graph + achievements + competencies — all fitting on one page)
-- Is page 2 properly filled? (Indegene bullets should use most of the page — not sparse, not overflowing)
+- Is page 2 properly filled? (Indegene bullets should use most of the page — not sparse, not overflowing). If page 2 has significant blank space at the bottom (more than ~15% of the page is empty), flag it as a content adjustment and recommend: "Page 2 has blank space — add 1-2 more Indegene bullet points from the knowledge base to fill the page. Draw from relevant but currently unused experiences."
 - Is page 3 balanced? (past roles + education + remaining sections)
 - Are there any text overflows, cut-off words, or clipped lines?
 - Are margins consistent on all sides?

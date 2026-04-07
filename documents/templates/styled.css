@@ -72,7 +72,7 @@ body {
 
 .nav-item {
     flex: 1;
-    writing-mode: vertical-lr;
+    writing-mode: vertical-rl;
     display: flex;
     align-items: center;
     justify-content: center;
