@@ -17,7 +17,7 @@ DEFAULT_CSS_VARS = {
     "--bullet-gap": "1pt",
     "--role-gap": "5pt",
     "--photo-size": "82pt",
-    "--nav-width": "30pt",
+    "--nav-width": "38pt",
 }
 
 

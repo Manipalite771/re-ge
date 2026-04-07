@@ -63,29 +63,34 @@ body {
 /* ── Right navigation panel (rotated text, full page height) ── */
 .nav-panel {
     width: var(--nav-width);
-    display: flex;
-    flex-direction: column;
-    gap: 0;
     border-left: 0.5pt solid var(--accent-light);
     flex-shrink: 0;
+    align-self: stretch;
+    position: relative;
 }
 
 .nav-item {
-    flex: 1;
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 33.33%;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: visible;
     background: #f7fbfe;
     border-left: 2.5pt solid transparent;
 }
 
+.nav-item:nth-child(1) { top: 0; }
+.nav-item:nth-child(2) { top: 33.33%; }
+.nav-item:nth-child(3) { top: 66.66%; }
+
 .nav-text {
-    display: inline-block;
-    transform: rotate(90deg);
+    writing-mode: vertical-rl;
+    text-orientation: sideways;
     white-space: nowrap;
     font-size: calc(5pt * var(--scale));
-    color: #c0c0c0;
+    color: #9ab;
     text-transform: uppercase;
     letter-spacing: 0.5pt;
     line-height: 1;
