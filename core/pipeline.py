@@ -136,28 +136,36 @@ def run_pipeline(
             qa_results["final_passed"] = False
             break
 
-        # Build fix instructions and re-run writer + CSS fixer
+        # Determine fix strategy based on scores
         _step(f"Fixing issues from QA pass {qa_pass + 1} (simple: {simple_score}, styled: {styled_score})...", 7 + qa_pass)
 
-        # Content fixes → re-run writer
-        fix_instructions = build_qa_fix_instructions(qa_simple, qa_styled)
-        if fix_instructions:
-            cumulative_fixes.append(f"--- QA Pass {qa_pass + 1} Feedback ---\n{fix_instructions}")
+        best_score = max(simple_score, styled_score)
+        content_is_good = best_score >= QA_SCORE_THRESHOLD
 
-        combined_fixes = "\n\n".join(cumulative_fixes)
+        if content_is_good:
+            # At least one variant scores well → content is proven good.
+            # Only run CSS fixer for layout adjustments. Do NOT re-run Writer.
+            _step(f"Content OK (best: {best_score}) — adjusting layout only...", 7 + qa_pass)
+        else:
+            # Both variants score poorly → content may need fixing too.
+            fix_instructions = build_qa_fix_instructions(qa_simple, qa_styled)
+            if fix_instructions:
+                cumulative_fixes.append(f"--- QA Pass {qa_pass + 1} Feedback ---\n{fix_instructions}")
 
-        resume_content = write_resume(
-            strategy=strategy,
-            knowledge_base=kb,
-            jd_analysis=jd_analysis,
-            qa_fix_instructions=combined_fixes,
-        )
+            combined_fixes = "\n\n".join(cumulative_fixes)
 
-        # Layout fixes → CSS fixer adjusts CSS variables
+            resume_content = write_resume(
+                strategy=strategy,
+                knowledge_base=kb,
+                jd_analysis=jd_analysis,
+                qa_fix_instructions=combined_fixes,
+            )
+
+        # Always run CSS fixer for layout adjustments
         _step(f"Adjusting layout from QA pass {qa_pass + 1}...", 7 + qa_pass)
         css_overrides = generate_css_fixes(qa_simple, qa_styled, css_vars_state)
 
-        # Re-render documents with new content + CSS overrides
+        # Re-render documents
         base_name_fixed = f"{base_name}_v{qa_pass + 2}"
         pdf_simple, pdf_styled = _generate_documents(resume_content, base_name_fixed, css_overrides=css_overrides)
 
