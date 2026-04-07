@@ -77,8 +77,8 @@ def run_pipeline(
     evaluation = evaluate_resume(resume_content, jd_analysis)
 
     # Prepare file names
-    company = jd_analysis.get("company", "Unknown").replace(" ", "_").replace("/", "_")
-    role = jd_analysis.get("role", "Unknown").replace(" ", "_").replace("/", "_")
+    company = (jd_analysis.get("company") or "Unknown").replace(" ", "_").replace("/", "_")
+    role = (jd_analysis.get("role") or "Unknown").replace(" ", "_").replace("/", "_")
     timestamp = __import__("datetime").datetime.now().strftime("%Y%m%d_%H%M%S")
     base_name = f"{company}_{role}_{timestamp}"
 
