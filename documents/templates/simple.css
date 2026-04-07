@@ -1,4 +1,4 @@
-/* Simple ATS-safe resume — 3-page layout */
+/* Simple ATS-safe resume — 3-page layout with right nav panel */
 @page {
     size: letter;
     margin: 0;
@@ -18,6 +18,7 @@
     --bullet-gap: 1pt;
     --role-gap: 5pt;
     --photo-size: 72pt;
+    --nav-width: 52pt;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -38,6 +39,52 @@ body {
     padding: 0;
 }
 
+/* ── Page layout: content + right nav panel ── */
+.page-layout {
+    display: flex;
+    min-height: 756pt; /* letter height (792pt) minus small tolerance */
+}
+
+.page-layout-1 {
+    min-height: 0; /* page 1: banner above takes space, don't force full height */
+}
+
+.page-content {
+    flex: 1;
+    padding: var(--content-padding-v) var(--content-padding-h) 18pt var(--content-padding-h);
+}
+
+/* ── Right navigation panel ── */
+.nav-panel {
+    width: var(--nav-width);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0;
+    border-left: 0.5pt solid #e5e5e5;
+    background: #fafafa;
+    flex-shrink: 0;
+}
+
+.nav-item {
+    padding: 16pt 5pt;
+    font-size: calc(6pt * var(--scale));
+    text-align: center;
+    color: #ccc;
+    text-transform: uppercase;
+    letter-spacing: 0.4pt;
+    line-height: 1.35;
+    border-left: 2.5pt solid transparent;
+    margin-left: -0.5pt; /* overlap the panel border */
+}
+
+.nav-item.active {
+    color: #333;
+    font-weight: 700;
+    border-left-color: #333;
+    background: #f0f0f0;
+}
+
 /* ── Banner header ── */
 .banner {
     background: #333;
@@ -53,6 +100,7 @@ body {
     height: var(--photo-size);
     border-radius: 50%;
     object-fit: cover;
+    object-position: center 30%;
     border: 2.5pt solid rgba(255,255,255,0.3);
     flex-shrink: 0;
 }
@@ -79,11 +127,6 @@ body {
     font-size: calc(8pt * var(--scale));
     color: #aaa;
     letter-spacing: 0.2pt;
-}
-
-/* ── Body content ── */
-.content {
-    padding: var(--content-padding-v) var(--content-padding-h) 18pt var(--content-padding-h);
 }
 
 /* ── Section headings ── */
@@ -206,51 +249,4 @@ li {
 
 .earlier-experience strong {
     font-style: normal;
-}
-
-/* ── Page navigation cue (bottom of page 1) ── */
-.page-nav {
-    margin-top: 10pt;
-    padding-top: 5pt;
-    border-top: 0.5pt solid #ccc;
-    text-align: center;
-    font-size: calc(7.5pt * var(--scale));
-    color: #999;
-    letter-spacing: 0.3pt;
-}
-
-.nav-current {
-    font-weight: 700;
-    color: #555;
-}
-
-.nav-sep {
-    margin: 0 4pt;
-    color: #ccc;
-}
-
-.nav-link {
-    color: #888;
-}
-
-/* ── Page headers (top of pages 2 and 3) ── */
-.page-header {
-    background: #f5f5f5;
-    padding: 8pt 28pt;
-    border-bottom: 1pt solid #ddd;
-}
-
-.page-header-label {
-    font-size: calc(10pt * var(--scale));
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.5pt;
-    color: #333;
-}
-
-.page-header-desc {
-    font-size: calc(8.5pt * var(--scale));
-    color: #777;
-    margin-left: 8pt;
-    letter-spacing: 0.2pt;
 }
