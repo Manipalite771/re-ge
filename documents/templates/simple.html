@@ -18,42 +18,48 @@
             </p>
         </div>
     </div>
-    <div class="content">
-        <section><h2>Professional Summary</h2><p class="summary">{{ summary }}</p></section>
-        <section class="career-graph-section"><img src="Tanmay Career Graph.png" alt="Career Skill Architecture" class="career-graph"></section>
-        {% if signature_achievements %}<section><h2>Key Achievements</h2><ul class="achievements">{% for item in signature_achievements %}<li>{{ item }}</li>{% endfor %}</ul></section>{% endif %}
-        {% if competencies %}<section><h2>Core Competencies</h2><p class="competencies">{{ competencies | join(' | ') }}</p></section>{% endif %}
+    <div class="page-wrapper page-wrapper-1">
+        <div class="content">
+            <section><h2>Professional Summary</h2><p class="summary">{{ summary }}</p></section>
+            <section class="career-graph-section"><img src="Tanmay Career Graph.png" alt="Career Skill Architecture" class="career-graph"></section>
+            {% if signature_achievements %}<section><h2>Key Achievements</h2><ul class="achievements">{% for item in signature_achievements %}<li>{{ item }}</li>{% endfor %}</ul></section>{% endif %}
+            {% if competencies %}<section><h2>Core Competencies</h2><p class="competencies">{{ competencies | join(' | ') }}</p></section>{% endif %}
+        </div>
+        <div class="page-nav"><span class="nav-active">&#9679; Snapshot</span><span class="nav-sep">|</span><span>&#9675; The Deep Dive</span><span class="nav-sep">|</span><span>&#9675; Credentials</span></div>
     </div>
-    <div class="page-nav"><span class="nav-active">&#9679; Snapshot</span><span class="nav-sep">|</span><span>&#9675; The Deep Dive</span><span class="nav-sep">|</span><span>&#9675; Credentials</span></div>
 
     <!-- PAGE 2: THE DEEP DIVE -->
     <div class="page-break"></div>
-    <div class="content">
-        <section><h2>Professional Experience</h2>
-            {% if experience and experience | length > 0 %}
-            <div class="role">
-                <div class="role-header"><span class="company">{{ experience[0].company }}</span><span class="dates">{{ experience[0].dates }}</span></div>
-                <div class="role-subheader"><span class="title">{{ experience[0].title }}</span>{% if experience[0].location %}<span class="location">{{ experience[0].location }}</span>{% endif %}</div>
-                {% if experience[0].progression %}<p class="progression">{{ experience[0].progression }}</p>{% endif %}
-                {% if experience[0].scope_line %}<p class="scope">{{ experience[0].scope_line }}</p>{% endif %}
-                <ul>{% for bullet in experience[0].bullets %}<li>{{ bullet | bold_md }}</li>{% endfor %}</ul>
-            </div>
-            {% endif %}
-        </section>
+    <div class="page-wrapper">
+        <div class="content">
+            <section><h2>Professional Experience</h2>
+                {% if experience and experience | length > 0 %}
+                <div class="role">
+                    <div class="role-header"><span class="company">{{ experience[0].company }}</span><span class="dates">{{ experience[0].dates }}</span></div>
+                    <div class="role-subheader"><span class="title">{{ experience[0].title }}</span>{% if experience[0].location %}<span class="location">{{ experience[0].location }}</span>{% endif %}</div>
+                    {% if experience[0].progression %}<p class="progression">{{ experience[0].progression }}</p>{% endif %}
+                    {% if experience[0].scope_line %}<p class="scope">{{ experience[0].scope_line }}</p>{% endif %}
+                    <ul>{% for bullet in experience[0].bullets %}<li>{{ bullet | bold_md }}</li>{% endfor %}</ul>
+                </div>
+                {% endif %}
+            </section>
+        </div>
+        <div class="page-nav"><span>&#9675; Snapshot</span><span class="nav-sep">|</span><span class="nav-active">&#9679; The Deep Dive</span><span class="nav-sep">|</span><span>&#9675; Credentials</span></div>
     </div>
-    <div class="page-nav"><span>&#9675; Snapshot</span><span class="nav-sep">|</span><span class="nav-active">&#9679; The Deep Dive</span><span class="nav-sep">|</span><span>&#9675; Credentials</span></div>
 
     <!-- PAGE 3: CREDENTIALS -->
     <div class="page-break"></div>
-    <div class="content">
-        {% if experience | length > 1 %}<section><h2>Past Experience</h2>{% for role in experience[1:] %}<div class="role"><div class="role-header"><span class="company">{{ role.company }}</span><span class="dates">{{ role.dates }}</span></div><div class="role-subheader"><span class="title">{{ role.title }}</span>{% if role.location %}<span class="location">{{ role.location }}</span>{% endif %}</div>{% if role.scope_line %}<p class="scope">{{ role.scope_line }}</p>{% endif %}<ul>{% for bullet in role.bullets %}<li>{{ bullet | bold_md }}</li>{% endfor %}</ul></div>{% endfor %}</section>{% endif %}
-        {% if earlier_experience_summary %}<p class="earlier-experience">{{ earlier_experience_summary }}</p>{% endif %}
-        <section><h2>Education</h2>{% for edu in education %}<div class="role"><div class="role-header"><span class="company">{{ edu.institution }}</span><span class="dates">{{ edu.dates }}</span></div><div class="role-subheader"><span class="title">{{ edu.degree }}</span><span class="location">{{ edu.gpa }}</span></div>{% if edu.highlights %}<ul>{% for h in edu.highlights %}<li>{{ h }}</li>{% endfor %}</ul>{% endif %}</div>{% endfor %}</section>
-        {% if volunteering and volunteering.org %}<section><h2>Volunteering</h2><div class="role"><div class="role-header"><span class="company">{{ volunteering.org }}</span><span class="dates">{{ volunteering.dates }}</span></div><div class="role-subheader"><span class="title">{{ volunteering.role }}</span><span class="location">{{ volunteering.location }}</span></div>{% if volunteering.bullet %}<ul><li>{{ volunteering.bullet }}</li></ul>{% endif %}</div></section>{% endif %}
-        {% if early_career %}<section><h2>Early Career</h2><ul>{% for item in early_career %}<li>{{ item }}</li>{% endfor %}</ul></section>{% endif %}
-        {% if achievements_and_tools %}<section><h2>Achievements & Tools</h2>{% if achievements_and_tools.achievements %}<p><strong>Achievements:</strong> {{ achievements_and_tools.achievements | join(' | ') }}</p>{% endif %}{% if achievements_and_tools.tools %}<p><strong>Tools:</strong> {{ achievements_and_tools.tools | join(' | ') }}</p>{% endif %}</section>{% endif %}
+    <div class="page-wrapper">
+        <div class="content">
+            {% if experience | length > 1 %}<section><h2>Past Experience</h2>{% for role in experience[1:] %}<div class="role"><div class="role-header"><span class="company">{{ role.company }}</span><span class="dates">{{ role.dates }}</span></div><div class="role-subheader"><span class="title">{{ role.title }}</span>{% if role.location %}<span class="location">{{ role.location }}</span>{% endif %}</div>{% if role.scope_line %}<p class="scope">{{ role.scope_line }}</p>{% endif %}<ul>{% for bullet in role.bullets %}<li>{{ bullet | bold_md }}</li>{% endfor %}</ul></div>{% endfor %}</section>{% endif %}
+            {% if earlier_experience_summary %}<p class="earlier-experience">{{ earlier_experience_summary }}</p>{% endif %}
+            <section><h2>Education</h2>{% for edu in education %}<div class="role"><div class="role-header"><span class="company">{{ edu.institution }}</span><span class="dates">{{ edu.dates }}</span></div><div class="role-subheader"><span class="title">{{ edu.degree }}</span><span class="location">{{ edu.gpa }}</span></div>{% if edu.highlights %}<ul>{% for h in edu.highlights %}<li>{{ h }}</li>{% endfor %}</ul>{% endif %}</div>{% endfor %}</section>
+            {% if volunteering and volunteering.org %}<section><h2>Volunteering</h2><div class="role"><div class="role-header"><span class="company">{{ volunteering.org }}</span><span class="dates">{{ volunteering.dates }}</span></div><div class="role-subheader"><span class="title">{{ volunteering.role }}</span><span class="location">{{ volunteering.location }}</span></div>{% if volunteering.bullet %}<ul><li>{{ volunteering.bullet }}</li></ul>{% endif %}</div></section>{% endif %}
+            {% if early_career %}<section><h2>Early Career</h2><ul>{% for item in early_career %}<li>{{ item }}</li>{% endfor %}</ul></section>{% endif %}
+            {% if achievements_and_tools %}<section><h2>Achievements & Tools</h2>{% if achievements_and_tools.achievements %}<p><strong>Achievements:</strong> {{ achievements_and_tools.achievements | join(' | ') }}</p>{% endif %}{% if achievements_and_tools.tools %}<p><strong>Tools:</strong> {{ achievements_and_tools.tools | join(' | ') }}</p>{% endif %}</section>{% endif %}
+        </div>
+        <div class="page-nav"><span>&#9675; Snapshot</span><span class="nav-sep">|</span><span>&#9675; The Deep Dive</span><span class="nav-sep">|</span><span class="nav-active">&#9679; Credentials</span></div>
     </div>
-    <div class="page-nav"><span>&#9675; Snapshot</span><span class="nav-sep">|</span><span>&#9675; The Deep Dive</span><span class="nav-sep">|</span><span class="nav-active">&#9679; Credentials</span></div>
 
 </body>
 </html>
