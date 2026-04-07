@@ -53,10 +53,9 @@ body {
     width: var(--photo-size);
     height: var(--photo-size);
     border-radius: 50%;
-    object-fit: contain;
+    object-fit: cover;
     border: 2.5pt solid rgba(255,255,255,0.3);
     flex-shrink: 0;
-    background: #444;
 }
 
 .banner-text { flex: 1; }
@@ -212,18 +211,12 @@ li {
 
 /* ── Bottom page navigation strip ── */
 .page-nav {
-    position: fixed;
-    bottom: 8pt;
-    left: 0;
-    right: 0;
     text-align: center;
     font-size: calc(6.5pt * var(--scale));
     color: #bbb;
     letter-spacing: 0.3pt;
-}
-
-.page-nav .nav-dot {
-    margin: 0 2pt;
+    padding: 6pt 0;
+    margin-top: 4pt;
 }
 
 .page-nav .nav-active {
