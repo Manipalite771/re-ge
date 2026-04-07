@@ -17,7 +17,7 @@
     --bullet-line-height: 1.3;
     --bullet-gap: 1pt;
     --role-gap: 5pt;
-    --photo-size: 82pt;
+    --photo-size: 95pt;
     --nav-width: 38pt;
 }
 
@@ -54,50 +54,18 @@ body {
     padding: var(--content-padding-v) var(--content-padding-h) 18pt var(--content-padding-h);
 }
 
-/* ── Right navigation panel (rotated text, full page height) ── */
+/* ── Right navigation panel (SVG-based rotated text) ── */
 .nav-panel {
     width: var(--nav-width);
     border-left: 0.5pt solid #e5e5e5;
     flex-shrink: 0;
     align-self: stretch;
-    position: relative;
 }
 
-.nav-item {
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 33.33%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #fafafa;
-    border-left: 2.5pt solid transparent;
-}
-
-.nav-item:nth-child(1) { top: 0; }
-.nav-item:nth-child(2) { top: 33.33%; }
-.nav-item:nth-child(3) { top: 66.66%; }
-
-.nav-text {
-    writing-mode: vertical-rl;
-    text-orientation: sideways;
-    white-space: nowrap;
-    font-size: calc(5pt * var(--scale));
-    color: #999;
-    text-transform: uppercase;
-    letter-spacing: 0.5pt;
-    line-height: 1;
-}
-
-.nav-item.active {
-    background: #f0f0f0;
-    border-left-color: #333;
-}
-
-.nav-item.active .nav-text {
-    color: #333;
-    font-weight: 700;
+.nav-panel svg {
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 
 /* ── Banner header ── */
@@ -115,7 +83,7 @@ body {
     height: var(--photo-size);
     border-radius: 50%;
     object-fit: cover;
-    object-position: center 22%;
+    object-position: center 15%;
     border: 2.5pt solid rgba(255,255,255,0.3);
     flex-shrink: 0;
 }
