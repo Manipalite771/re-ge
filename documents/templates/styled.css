@@ -72,8 +72,7 @@ body {
 
 .nav-item {
     flex: 1;
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
+    writing-mode: vertical-lr;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -83,13 +82,13 @@ body {
     letter-spacing: 0.8pt;
     line-height: 1;
     background: #f7fbfe;
-    border-right: 2.5pt solid transparent;
+    border-left: 2.5pt solid transparent;
 }
 
 .nav-item.active {
     color: var(--accent);
     font-weight: 700;
-    border-right-color: var(--accent);
+    border-left-color: var(--accent);
     background: #eaf2f8;
 }
 
