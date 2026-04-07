@@ -48,11 +48,11 @@ body {
 /* ── Page layout: content + right nav panel ── */
 .page-layout {
     display: flex;
-    min-height: 756pt;
+    min-height: 792pt; /* full letter page height */
 }
 
 .page-layout-1 {
-    min-height: 0;
+    min-height: calc(792pt - var(--banner-padding-v) * 2 - var(--photo-size));
 }
 
 .page-content {
