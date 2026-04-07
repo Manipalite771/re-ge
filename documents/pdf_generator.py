@@ -31,18 +31,26 @@ def _count_pages(pdf_path: Path) -> int:
     return count
 
 
-def _render_pdf(html_content: str, css_path: Path, output_path: Path, scale: float):
-    """Render HTML to PDF with a given font scale factor."""
+def _render_pdf(html_content: str, css_path: Path, output_path: Path, scale: float, css_overrides: str = ""):
+    """Render HTML to PDF with a given font scale factor and optional CSS overrides."""
     scale_css = weasyprint.CSS(string=f":root {{ --scale: {scale}; }}")
     base_css = weasyprint.CSS(filename=str(css_path))
+    stylesheets = [base_css, scale_css]
+    if css_overrides:
+        stylesheets.append(weasyprint.CSS(string=css_overrides))
     html = weasyprint.HTML(string=html_content, base_url=str(TEMPLATES_DIR))
-    html.write_pdf(str(output_path), stylesheets=[base_css, scale_css])
+    html.write_pdf(str(output_path), stylesheets=stylesheets)
 
 
-def generate_simple_pdf(resume_content: dict, filename: str = "resume_simple.pdf") -> Path:
+def generate_simple_pdf(resume_content: dict, filename: str = "resume_simple.pdf", css_overrides: str = "") -> Path:
     """Render resume as a clean, single-column, ATS-safe PDF.
 
     Automatically scales fonts down if content exceeds 3 pages.
+
+    Args:
+        resume_content: Structured resume dict from the writer.
+        filename: Output filename.
+        css_overrides: Optional CSS string with :root variable overrides from the CSS QA fixer.
     """
     env = jinja2.Environment(
         loader=jinja2.FileSystemLoader(str(TEMPLATES_DIR)),
@@ -57,7 +65,7 @@ def generate_simple_pdf(resume_content: dict, filename: str = "resume_simple.pdf
 
     scale = SCALE_START
     while scale >= SCALE_MIN:
-        _render_pdf(html_content, css_path, output_path, scale)
+        _render_pdf(html_content, css_path, output_path, scale, css_overrides)
         pages = _count_pages(output_path)
         if pages <= MAX_PAGES:
             break

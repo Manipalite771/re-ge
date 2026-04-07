@@ -226,10 +226,15 @@ def generate_styled_docx(resume_content: dict, filename: str = "resume_styled.do
     return output_path
 
 
-def generate_styled_pdf(resume_content: dict, filename: str = "resume_styled.pdf") -> Path:
+def generate_styled_pdf(resume_content: dict, filename: str = "resume_styled.pdf", css_overrides: str = "") -> Path:
     """Render resume as a styled PDF using WeasyPrint with the styled template.
 
     Automatically scales fonts down if content exceeds 3 pages.
+
+    Args:
+        resume_content: Structured resume dict from the writer.
+        filename: Output filename.
+        css_overrides: Optional CSS string with :root variable overrides from the CSS QA fixer.
     """
     env = jinja2.Environment(
         loader=jinja2.FileSystemLoader(str(TEMPLATES_DIR)),
@@ -251,8 +256,11 @@ def generate_styled_pdf(resume_content: dict, filename: str = "resume_styled.pdf
     while scale >= SCALE_MIN:
         scale_css = weasyprint.CSS(string=f":root {{ --scale: {scale}; }}")
         base_css = weasyprint.CSS(filename=str(css_path))
+        stylesheets = [base_css, scale_css]
+        if css_overrides:
+            stylesheets.append(weasyprint.CSS(string=css_overrides))
         html = weasyprint.HTML(string=html_content, base_url=str(TEMPLATES_DIR))
-        html.write_pdf(str(output_path), stylesheets=[base_css, scale_css])
+        html.write_pdf(str(output_path), stylesheets=stylesheets)
 
         doc = fitz.open(str(output_path))
         pages = len(doc)

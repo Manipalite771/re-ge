@@ -10,6 +10,7 @@ from core.strategist import create_strategy
 from core.writer import write_resume
 from core.evaluator import evaluate_resume
 from core.qa import run_visual_qa, build_qa_fix_instructions
+from core.css_fixer import generate_css_fixes
 from documents.pdf_generator import generate_simple_pdf
 from documents.docx_generator import generate_styled_pdf
 
@@ -18,10 +19,10 @@ MAX_QA_ITERATIONS = 5
 QA_SCORE_THRESHOLD = 80
 
 
-def _generate_documents(resume_content: dict, base_name: str) -> tuple[Path, Path]:
+def _generate_documents(resume_content: dict, base_name: str, css_overrides: str = "") -> tuple[Path, Path]:
     """Generate both PDF variants and return their paths."""
-    pdf_simple = generate_simple_pdf(resume_content, f"{base_name}_simple.pdf")
-    styled_path = generate_styled_pdf(resume_content, f"{base_name}_styled.pdf")
+    pdf_simple = generate_simple_pdf(resume_content, f"{base_name}_simple.pdf", css_overrides=css_overrides)
+    styled_path = generate_styled_pdf(resume_content, f"{base_name}_styled.pdf", css_overrides=css_overrides)
     return pdf_simple, styled_path
 
 
@@ -89,6 +90,9 @@ def run_pipeline(
     qa_results = {"iterations": [], "final_passed": False}
     # Accumulate fix instructions across iterations so the writer sees full history
     cumulative_fixes = []
+    # Track CSS variable overrides across iterations
+    css_overrides = ""
+    css_vars_state = None  # mutable dict tracked by css_fixer
 
     for qa_pass in range(MAX_QA_ITERATIONS):
         step_label = f"Visual QA pass {qa_pass + 1}/{MAX_QA_ITERATIONS}"
@@ -132,16 +136,16 @@ def run_pipeline(
             qa_results["final_passed"] = False
             break
 
-        # Build fix instructions and re-run writer
+        # Build fix instructions and re-run writer + CSS fixer
         _step(f"Fixing issues from QA pass {qa_pass + 1} (simple: {simple_score}, styled: {styled_score})...", 7 + qa_pass)
 
+        # Content fixes → re-run writer
         fix_instructions = build_qa_fix_instructions(qa_simple, qa_styled)
         if fix_instructions:
             cumulative_fixes.append(f"--- QA Pass {qa_pass + 1} Feedback ---\n{fix_instructions}")
 
         combined_fixes = "\n\n".join(cumulative_fixes)
 
-        # Re-run writer with cumulative QA fix instructions
         resume_content = write_resume(
             strategy=strategy,
             knowledge_base=kb,
@@ -149,9 +153,13 @@ def run_pipeline(
             qa_fix_instructions=combined_fixes,
         )
 
-        # Re-render documents
+        # Layout fixes → CSS fixer adjusts CSS variables
+        _step(f"Adjusting layout from QA pass {qa_pass + 1}...", 7 + qa_pass)
+        css_overrides = generate_css_fixes(qa_simple, qa_styled, css_vars_state)
+
+        # Re-render documents with new content + CSS overrides
         base_name_fixed = f"{base_name}_v{qa_pass + 2}"
-        pdf_simple, pdf_styled = _generate_documents(resume_content, base_name_fixed)
+        pdf_simple, pdf_styled = _generate_documents(resume_content, base_name_fixed, css_overrides=css_overrides)
 
     # Final QA scores
     last_iter = qa_results["iterations"][-1]
@@ -165,6 +173,7 @@ def run_pipeline(
         "resume_content": resume_content,
         "evaluation": evaluation,
         "qa_results": qa_results,
+        "css_overrides": css_overrides,
         "pdf_simple_path": pdf_simple,
         "pdf_styled_path": pdf_styled,
     }
