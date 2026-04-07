@@ -1,4 +1,4 @@
-/* Simple ATS-safe resume — 3-page layout with right nav panel */
+/* Simple ATS-safe resume — 3-page layout with bottom page nav */
 @page {
     size: letter;
     margin: 0;
@@ -18,8 +18,8 @@
     --bullet-gap: 1pt;
     --role-gap: 5pt;
     --photo-size: 95pt;
-    --nav-width: 38pt;
 }
+
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -39,35 +39,6 @@ body {
     padding: 0;
 }
 
-/* ── Page layout: content + right nav panel ── */
-.page-layout {
-    display: flex;
-    min-height: 792pt; /* full letter page height */
-}
-
-.page-layout-1 {
-    min-height: calc(792pt - var(--banner-padding-v) * 2 - var(--photo-size));
-}
-
-.page-content {
-    flex: 1;
-    padding: var(--content-padding-v) var(--content-padding-h) 18pt var(--content-padding-h);
-}
-
-/* ── Right navigation panel (SVG-based rotated text) ── */
-.nav-panel {
-    width: var(--nav-width);
-    border-left: 0.5pt solid #e5e5e5;
-    flex-shrink: 0;
-    align-self: stretch;
-}
-
-.nav-panel svg {
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-
 /* ── Banner header ── */
 .banner {
     background: #333;
@@ -82,10 +53,10 @@ body {
     width: var(--photo-size);
     height: var(--photo-size);
     border-radius: 50%;
-    object-fit: cover;
-    object-position: center 15%;
+    object-fit: contain;
     border: 2.5pt solid rgba(255,255,255,0.3);
     flex-shrink: 0;
+    background: #444;
 }
 
 .banner-text { flex: 1; }
@@ -110,6 +81,11 @@ body {
     font-size: calc(8pt * var(--scale));
     color: #aaa;
     letter-spacing: 0.2pt;
+}
+
+/* ── Body content ── */
+.content {
+    padding: var(--content-padding-v) var(--content-padding-h) 18pt var(--content-padding-h);
 }
 
 /* ── Section headings ── */
@@ -232,4 +208,30 @@ li {
 
 .earlier-experience strong {
     font-style: normal;
+}
+
+/* ── Bottom page navigation strip ── */
+.page-nav {
+    position: fixed;
+    bottom: 8pt;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: calc(6.5pt * var(--scale));
+    color: #bbb;
+    letter-spacing: 0.3pt;
+}
+
+.page-nav .nav-dot {
+    margin: 0 2pt;
+}
+
+.page-nav .nav-active {
+    color: #444;
+    font-weight: 700;
+}
+
+.page-nav .nav-sep {
+    margin: 0 8pt;
+    color: #ddd;
 }
