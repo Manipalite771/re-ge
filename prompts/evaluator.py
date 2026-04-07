@@ -63,11 +63,27 @@ Evaluate the resume and return a JSON object:
     "passed": true,
     "details": "Whether the target company name appears in the resume (it should NOT)"
   }},
-  "estimated_page_count": 2,
+  "title_authenticity_check": {{
+    "passed": true,
+    "details": "Whether the header headline reflects the candidate's actual current title (Senior Manager) rather than copying the JD's target title. The domain/specialization can be angled toward the JD, but the seniority level must match reality."
+  }},
+  "kb_grounding_check": {{
+    "score": 90,
+    "max": 100,
+    "fabricated_bullets": ["List any bullets that appear to be paraphrased from the JD rather than sourced from the candidate's actual experience in the knowledge base. A bullet fails this check if it reads like a JD requirement restated as an accomplishment without specific projects, metrics, or context from the KB."],
+    "details": "Assessment of whether resume content is genuinely drawn from the knowledge base vs. regurgitated from the JD"
+  }},
+  "estimated_page_count": 3,
   "strengths": [
     "Top 3 strengths of this resume for this role"
   ]
 }}
+
+IMPORTANT: The resume uses a 3-PAGE LAYOUT:
+- Page 1: Snapshot (summary, career graph, key achievements, competencies)
+- Page 2: Deep Dive (Indegene experience only — full page)
+- Page 3: Full Picture (past experience, education, volunteering, tools)
+Evaluate whether the content is properly distributed across this structure. The Indegene section should have 12-15 rich bullets filling page 2.
 
 Be rigorous but fair. Score against real-world hiring standards for this level and function."""
 

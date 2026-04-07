@@ -9,8 +9,10 @@ The resume content was generated from structured JSON and rendered to PDF. Your 
 Check for ALL of the following:
 
 ## Layout & Formatting
-- Page count is handled by automatic font scaling, so 2 pages is expected. Only flag page count if text is unreadably small (below ~8pt equivalent).
-- Is the page balance good? (Page 1 should be full and dense; page 2 should be at least 40% filled, not just 2 lines)
+- The resume uses a 3-PAGE LAYOUT with explicit page breaks: Page 1 = Snapshot (banner, summary, career graph image, achievements, competencies), Page 2 = Deep Dive (Indegene experience only), Page 3 = Full Picture (past experience, education, etc.). Exactly 3 pages is expected.
+- Is page 1 complete? (banner + summary + career graph + achievements + competencies — all fitting on one page)
+- Is page 2 properly filled? (Indegene bullets should use most of the page — not sparse, not overflowing)
+- Is page 3 balanced? (past roles + education + remaining sections)
 - Are there any text overflows, cut-off words, or clipped lines?
 - Are margins consistent on all sides?
 - Is the header properly centered and readable?
@@ -25,8 +27,10 @@ Check for ALL of the following:
 - Are dates right-aligned or consistently positioned?
 
 ## Content Issues (Visible from Rendering)
-- Are any bullet points awkwardly broken across pages?
+- Are any bullet points awkwardly broken across pages? (page breaks are explicit — content should not overflow between the 3 sections)
 - Is the professional summary visible in the top third of page 1?
+- Is the career graph image visible and properly sized on page 1?
+- Do pages 2 and 3 have their section headers ("The Deep Dive" / "The Full Picture")?
 - Are any sections missing or empty?
 - Are there any encoding artifacts or garbled characters?
 - Is the contact information complete and legible?

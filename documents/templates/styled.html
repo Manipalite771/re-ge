@@ -5,6 +5,11 @@
     <link rel="stylesheet" href="styled.css">
 </head>
 <body>
+
+    <!-- ================================================================ -->
+    <!-- PAGE 1: THE SNAPSHOT                                             -->
+    <!-- ================================================================ -->
+
     <!-- Banner header with photo -->
     <div class="banner">
         <img src="Picture.jpg" alt="Photo" class="profile-photo">
@@ -25,12 +30,16 @@
         </div>
     </div>
 
-    <!-- Body content -->
     <div class="content">
         <!-- Professional Summary -->
         <section>
             <h2><span class="section-icon">&#9670;</span> Professional Summary</h2>
             <p class="summary">{{ summary }}</p>
+        </section>
+
+        <!-- Career Graph (fixed asset — same for all resumes) -->
+        <section class="career-graph-section">
+            <img src="Tanmay Career Graph.png" alt="Career Skill Architecture" class="career-graph">
         </section>
 
         <!-- Signature Achievements -->
@@ -57,10 +66,77 @@
         </section>
         {% endif %}
 
-        <!-- Professional Experience -->
+        <!-- Page navigation cue -->
+        <div class="page-nav">
+            <span class="nav-current">p.1 Snapshot</span>
+            <span class="nav-sep">&middot;</span>
+            <span class="nav-link">p.2 Current Role Deep-Dive</span>
+            <span class="nav-sep">&middot;</span>
+            <span class="nav-link">p.3 Career History &amp; Credentials</span>
+        </div>
+    </div>
+
+
+    <!-- ================================================================ -->
+    <!-- PAGE 2: THE DEEP DIVE — Current Role                            -->
+    <!-- ================================================================ -->
+
+    <div class="page-break"></div>
+
+    <div class="page-header">
+        <span class="page-header-label">The Deep Dive</span>
+        <span class="page-header-desc">Current Role at Indegene</span>
+    </div>
+
+    <div class="content">
         <section>
             <h2><span class="section-icon">&#9670;</span> Professional Experience</h2>
-            {% for role in experience %}
+            {% if experience and experience | length > 0 %}
+            <div class="role">
+                <div class="role-header">
+                    <span class="company">{{ experience[0].company }}</span>
+                    <span class="dates">{{ experience[0].dates }}</span>
+                </div>
+                <div class="role-subheader">
+                    <span class="title">{{ experience[0].title }}</span>
+                    {% if experience[0].location %}
+                    <span class="location">{{ experience[0].location }}</span>
+                    {% endif %}
+                </div>
+                {% if experience[0].progression %}
+                <p class="progression">{{ experience[0].progression }}</p>
+                {% endif %}
+                {% if experience[0].scope_line %}
+                <p class="scope">{{ experience[0].scope_line }}</p>
+                {% endif %}
+                <ul>
+                    {% for bullet in experience[0].bullets %}
+                    <li>{{ bullet | bold_md }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </section>
+    </div>
+
+
+    <!-- ================================================================ -->
+    <!-- PAGE 3: THE FULL PICTURE — Career History & Credentials         -->
+    <!-- ================================================================ -->
+
+    <div class="page-break"></div>
+
+    <div class="page-header">
+        <span class="page-header-label">The Full Picture</span>
+        <span class="page-header-desc">Career History &amp; Credentials</span>
+    </div>
+
+    <div class="content">
+        <!-- Past Experience -->
+        {% if experience | length > 1 %}
+        <section>
+            <h2><span class="section-icon">&#9670;</span> Past Experience</h2>
+            {% for role in experience[1:] %}
             <div class="role">
                 <div class="role-header">
                     <span class="company">{{ role.company }}</span>
@@ -72,9 +148,6 @@
                     <span class="location">{{ role.location }}</span>
                     {% endif %}
                 </div>
-                {% if role.progression %}
-                <p class="progression">{{ role.progression }}</p>
-                {% endif %}
                 {% if role.scope_line %}
                 <p class="scope">{{ role.scope_line }}</p>
                 {% endif %}
@@ -86,42 +159,11 @@
             </div>
             {% endfor %}
         </section>
+        {% endif %}
 
-        <!-- Earlier Experience (condensed bridge) -->
+        <!-- Earlier Experience -->
         {% if earlier_experience_summary %}
         <p class="earlier-experience">{{ earlier_experience_summary }}</p>
-        {% endif %}
-
-        <!-- Early Career -->
-        {% if early_career %}
-        <section>
-            <h2><span class="section-icon">&#9670;</span> Early Career</h2>
-            <ul>
-                {% for item in early_career %}
-                <li>{{ item }}</li>
-                {% endfor %}
-            </ul>
-        </section>
-        {% endif %}
-
-        <!-- Volunteering -->
-        {% if volunteering and volunteering.org %}
-        <section>
-            <h2><span class="section-icon">&#9670;</span> Volunteering</h2>
-            <div class="role">
-                <div class="role-header">
-                    <span class="company">{{ volunteering.org }}</span>
-                    <span class="dates">{{ volunteering.dates }}</span>
-                </div>
-                <div class="role-subheader">
-                    <span class="title">{{ volunteering.role }}</span>
-                    <span class="location">{{ volunteering.location }}</span>
-                </div>
-                {% if volunteering.bullet %}
-                <ul><li>{{ volunteering.bullet }}</li></ul>
-                {% endif %}
-            </div>
-        </section>
         {% endif %}
 
         <!-- Education -->
@@ -148,6 +190,38 @@
             {% endfor %}
         </section>
 
+        <!-- Volunteering -->
+        {% if volunteering and volunteering.org %}
+        <section>
+            <h2><span class="section-icon">&#9670;</span> Volunteering</h2>
+            <div class="role">
+                <div class="role-header">
+                    <span class="company">{{ volunteering.org }}</span>
+                    <span class="dates">{{ volunteering.dates }}</span>
+                </div>
+                <div class="role-subheader">
+                    <span class="title">{{ volunteering.role }}</span>
+                    <span class="location">{{ volunteering.location }}</span>
+                </div>
+                {% if volunteering.bullet %}
+                <ul><li>{{ volunteering.bullet }}</li></ul>
+                {% endif %}
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- Early Career -->
+        {% if early_career %}
+        <section>
+            <h2><span class="section-icon">&#9670;</span> Early Career</h2>
+            <ul>
+                {% for item in early_career %}
+                <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endif %}
+
         <!-- Achievements & Tools -->
         {% if achievements_and_tools %}
         <section class="last-section">
@@ -161,5 +235,6 @@
         </section>
         {% endif %}
     </div>
+
 </body>
 </html>

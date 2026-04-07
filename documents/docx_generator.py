@@ -229,7 +229,7 @@ def generate_styled_docx(resume_content: dict, filename: str = "resume_styled.do
 def generate_styled_pdf(resume_content: dict, filename: str = "resume_styled.pdf") -> Path:
     """Render resume as a styled PDF using WeasyPrint with the styled template.
 
-    Automatically scales fonts down if content exceeds 2 pages.
+    Automatically scales fonts down if content exceeds 3 pages.
     """
     env = jinja2.Environment(
         loader=jinja2.FileSystemLoader(str(TEMPLATES_DIR)),
@@ -242,7 +242,7 @@ def generate_styled_pdf(resume_content: dict, filename: str = "resume_styled.pdf
     output_path = OUTPUT_DIR / filename
     css_path = TEMPLATES_DIR / "styled.css"
 
-    MAX_PAGES = 2
+    MAX_PAGES = 3
     SCALE_START = 1.0
     SCALE_STEP = 0.03
     SCALE_MIN = 0.78

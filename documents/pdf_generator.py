@@ -1,6 +1,6 @@
 """Generate clean, ATS-safe PDF from resume content using WeasyPrint.
 
-Includes dynamic font scaling to guarantee the resume fits within 2 pages.
+Includes dynamic font scaling to guarantee the resume fits within 3 pages.
 """
 
 import re
@@ -18,7 +18,7 @@ def _bold_md(text):
     """Convert **text** markdown bold to <strong> tags."""
     return Markup(re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', str(text)))
 
-MAX_PAGES = 2
+MAX_PAGES = 3
 SCALE_START = 1.0
 SCALE_STEP = 0.03
 SCALE_MIN = 0.78  # Never go below ~78% — keeps text readable
@@ -42,7 +42,7 @@ def _render_pdf(html_content: str, css_path: Path, output_path: Path, scale: flo
 def generate_simple_pdf(resume_content: dict, filename: str = "resume_simple.pdf") -> Path:
     """Render resume as a clean, single-column, ATS-safe PDF.
 
-    Automatically scales fonts down if content exceeds 2 pages.
+    Automatically scales fonts down if content exceeds 3 pages.
     """
     env = jinja2.Environment(
         loader=jinja2.FileSystemLoader(str(TEMPLATES_DIR)),
