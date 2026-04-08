@@ -16,7 +16,7 @@ DEFAULT_CSS_VARS = {
     "--bullet-line-height": "1.3",
     "--bullet-gap": "1pt",
     "--role-gap": "5pt",
-    "--photo-size": "72pt",
+    "--photo-size": "78pt",
 }
 
 

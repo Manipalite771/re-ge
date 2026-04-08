@@ -17,7 +17,7 @@
     --bullet-line-height: 1.3;
     --bullet-gap: 1pt;
     --role-gap: 5pt;
-    --photo-size: 72pt;
+    --photo-size: 78pt;
 }
 
 
@@ -54,6 +54,7 @@ body {
     height: var(--photo-size);
     border-radius: 50%;
     object-fit: cover;
+    object-position: center 10%;
     border: 2.5pt solid rgba(255,255,255,0.3);
     flex-shrink: 0;
 }

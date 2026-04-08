@@ -21,6 +21,8 @@ QA_SCORE_THRESHOLD = 80
 
 def _is_page2_sparse(qa_simple: dict, qa_styled: dict) -> bool:
     """Check if either QA result flags page 2 as having too much blank space."""
+    sparse_keywords = ["blank space", "sparse", "empty", "white space", "more bullet",
+                       "add 1-2", "add bullet", "not filled", "underutilized", "unfilled"]
     for qa in [qa_simple, qa_styled]:
         for field in ["critical_issues", "minor_issues", "content_adjustments_needed", "notes"]:
             value = qa.get(field, [])
@@ -28,12 +30,9 @@ def _is_page2_sparse(qa_simple: dict, qa_styled: dict) -> bool:
                 value = [value]
             for item in value:
                 item_lower = str(item).lower()
-                if ("page 2" in item_lower or "page two" in item_lower) and (
-                    "blank" in item_lower or "sparse" in item_lower or "empty" in item_lower
-                    or "space" in item_lower or "more bullet" in item_lower
-                    or "add" in item_lower and "bullet" in item_lower
-                ):
-                    return True
+                if ("page 2" in item_lower or "page two" in item_lower or "indegene" in item_lower):
+                    if any(kw in item_lower for kw in sparse_keywords):
+                        return True
     return False
 
 

@@ -113,7 +113,7 @@ CRITICAL RULES:
 3-PAGE LAYOUT RULES:
 - Page 1 (The Snapshot): header + summary + career graph (embedded as image, not generated) + key achievements + core competencies. Keep the summary to 3-5 lines and achievements to 3-5 bullets so everything fits on page 1.
 - Page 2 (The Deep Dive): ONLY the Indegene experience. This is a full dedicated page.
-- Page 3 (Career & Credentials): All other roles (Novartis, J&J, Intas), education, volunteering, early career, achievements & tools. Keep these condensed.
+- Page 3 (Career & Credentials): All other roles (Novartis, J&J, Intas), education, volunteering, early career, achievements & tools. Page 3 has a FULL page available — do NOT over-condense. Novartis should have 2-3 detailed bullets, J&J should have 2 bullets, Intas should have 1-2 bullets. Education highlights, volunteering, and achievements should all be included with proper detail. Use the space — an empty bottom half of page 3 looks worse than detailed content.
 - The Indegene role MUST be the FIRST entry in the "experience" array. Other roles follow after it.
 
 CRITICAL — INDEGENE BULLETS (NON-NEGOTIABLE):
