@@ -19,6 +19,24 @@ MAX_QA_ITERATIONS = 5
 QA_SCORE_THRESHOLD = 80
 
 
+def _is_page2_sparse(qa_simple: dict, qa_styled: dict) -> bool:
+    """Check if either QA result flags page 2 as having too much blank space."""
+    for qa in [qa_simple, qa_styled]:
+        for field in ["critical_issues", "minor_issues", "content_adjustments_needed", "notes"]:
+            value = qa.get(field, [])
+            if isinstance(value, str):
+                value = [value]
+            for item in value:
+                item_lower = str(item).lower()
+                if ("page 2" in item_lower or "page two" in item_lower) and (
+                    "blank" in item_lower or "sparse" in item_lower or "empty" in item_lower
+                    or "space" in item_lower or "more bullet" in item_lower
+                    or "add" in item_lower and "bullet" in item_lower
+                ):
+                    return True
+    return False
+
+
 def _generate_documents(resume_content: dict, base_name: str, css_overrides: str = "") -> tuple[Path, Path]:
     """Generate both PDF variants and return their paths."""
     pdf_simple = generate_simple_pdf(resume_content, f"{base_name}_simple.pdf", css_overrides=css_overrides)
@@ -142,13 +160,29 @@ def run_pipeline(
         best_score = max(simple_score, styled_score)
         content_is_good = best_score >= QA_SCORE_THRESHOLD
 
-        if content_is_good:
-            # At least one variant scores well → content is proven good.
+        # Detect if page 2 (Indegene) is sparse — needs more bullets from KB
+        page2_sparse = _is_page2_sparse(qa_simple, qa_styled)
+
+        if content_is_good and not page2_sparse:
+            # Content is proven good and page 2 is filled.
             # Only run CSS fixer for layout adjustments. Do NOT re-run Writer.
             _step(f"Content OK (best: {best_score}) — adjusting layout only...", 7 + qa_pass)
         else:
-            # Both variants score poorly → content may need fixing too.
+            # Re-run Writer: either scores are bad, or page 2 needs more bullets.
             fix_instructions = build_qa_fix_instructions(qa_simple, qa_styled)
+
+            if page2_sparse:
+                fix_instructions += (
+                    "\n\nPAGE 2 SPARSE — MUST ADD MORE INDEGENE BULLETS:\n"
+                    "Page 2 (Indegene experience) has significant blank space at the bottom. "
+                    "You MUST add 1-2 additional bullet points to the Indegene experience by "
+                    "finding relevant but currently UNUSED experiences from the knowledge base. "
+                    "Look for projects, initiatives, metrics, or outcomes in the KB that are "
+                    "not yet covered by the existing bullets. Do NOT duplicate existing bullets — "
+                    "find genuinely new material. Do NOT remove or shorten any existing bullets. "
+                    "The goal is <10% blank space at the bottom of page 2."
+                )
+
             if fix_instructions:
                 cumulative_fixes.append(f"--- QA Pass {qa_pass + 1} Feedback ---\n{fix_instructions}")
 
