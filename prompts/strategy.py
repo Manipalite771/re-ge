@@ -50,7 +50,7 @@ Return a JSON object:
   "page_budget": {{
     "summary_lines": 4,
     "signature_achievements_count": 4,
-    "indegene_bullets": "12-15 (Page 2 is entirely dedicated to Indegene — use the full page)",
+    "indegene_bullets": "15-18 (Page 2 is a FULL letter-size page dedicated to Indegene. Each bullet must be 2-3 lines long, not one-liners.)",
     "other_roles_bullets": "5-7 (Page 3 has a full page — Novartis 2-3 bullets, J&J 2, Intas 1-2. Do NOT over-condense.)",
     "total_target_pages": 3,
     "page_1": "Snapshot: summary + career graph (fixed image) + key achievements + competencies",

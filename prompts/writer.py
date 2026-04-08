@@ -108,7 +108,7 @@ CRITICAL RULES:
 3. KB-GROUNDING (MANDATORY): Every single bullet point in the resume MUST be directly traceable to a specific experience, project, metric, or outcome documented in the knowledge base. You are REPOSITIONING and REFRAMING real experiences toward the JD — you are NOT inventing new experiences inspired by the JD. If a bullet cannot be traced to a specific KB entry, DELETE IT. The JD tells you what to emphasize; the KB tells you what actually happened. When in doubt, check: "Does the KB contain evidence for this claim?" If no, cut it.
 4. Use strong action verbs that convey director-level agency: Led, Set, Established, Defined, Built, Drove, Owned, Transformed, Scaled, Aligned.
 4. Quantify everything possible: percentages, dollar amounts, team sizes, timeframes.
-5. Keep bullets concise (1-2 lines each). Do NOT trim content to fit pages — font scaling handles page fitting automatically.
+5. Indegene bullets should be 2-3 lines each (detailed, with scope + mechanism + outcome). Past experience bullets (Novartis, J&J, Intas) can be 1-2 lines. Do NOT trim content to fit pages — font scaling handles page fitting automatically.
 
 3-PAGE LAYOUT RULES:
 - Page 1 (The Snapshot): header + summary + career graph (embedded as image, not generated) + key achievements + core competencies. Keep the summary to 3-5 lines and achievements to 3-5 bullets so everything fits on page 1.
@@ -117,7 +117,11 @@ CRITICAL RULES:
 - The Indegene role MUST be the FIRST entry in the "experience" array. Other roles follow after it.
 
 CRITICAL — INDEGENE BULLETS (NON-NEGOTIABLE):
-The experience[0] entry (Indegene) MUST contain a "bullets" array with EXACTLY 12-15 bullet points. This is the single most important section of the entire resume — it fills the entire Page 2. An empty or missing bullets array is a FATAL ERROR. Each bullet must be a complete, quantified impact statement drawn from the knowledge base. DO NOT leave the Indegene bullets array empty under any circumstances.
+The experience[0] entry (Indegene) MUST contain a "bullets" array with 15-18 bullet points. This is the single most important section of the entire resume — it fills the ENTIRE Page 2 (a full letter-size page). An empty or missing bullets array is a FATAL ERROR.
+
+BULLET LENGTH: Each Indegene bullet MUST be 2-3 lines long (approximately 25-40 words each). Do NOT write one-line summaries. Each bullet should include: the action taken, the scope/scale, the mechanism/approach, AND the quantified outcome. A one-line bullet like "Led GenAI platform for Vertex" is TOO SHORT. Instead write: "Led a strategic GenAI Innovation Center for Vertex Pharmaceuticals (Dec 2025–Present), aligning consulting, client stakeholders, delivery teams, and engineering to define a prioritized roadmap, governance model, and scale-up plan covering regulatory authoring use cases."
+
+15-18 bullets × 2-3 lines each = 30-54 lines, which properly fills a full page. If you write fewer or shorter bullets, Page 2 will have ugly blank space at the bottom.
 6. Mirror JD keywords in context — never stuff. IMPORTANT: Mirroring keywords means using JD language to DESCRIBE real KB experiences. It does NOT mean copying JD requirements and presenting them as accomplishments. Bad: "Developed enterprise data strategy aligned to business outcomes" (copied from JD). Good: "Defined GenAI content strategy for top-5 pharma account, reducing review cycles by 40%" (real KB experience, framed in JD language).
 7. The Indegene experience should show clear progression and increasing scope.
 8. Omit roles or sections that the strategy marks for exclusion.

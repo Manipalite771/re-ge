@@ -13,8 +13,8 @@ DEFAULT_CSS_VARS = {
     "--banner-padding-v": "16pt",
     "--section-gap": "7pt",
     "--line-height": "1.32",
-    "--bullet-line-height": "1.3",
-    "--bullet-gap": "1pt",
+    "--bullet-line-height": "1.38",
+    "--bullet-gap": "2pt",
     "--role-gap": "5pt",
     "--photo-size": "78pt",
 }
