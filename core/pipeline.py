@@ -162,26 +162,15 @@ def run_pipeline(
         # Detect if page 2 (Indegene) is sparse — needs more bullets from KB
         page2_sparse = _is_page2_sparse(qa_simple, qa_styled)
 
-        if content_is_good and not page2_sparse:
-            # Content is proven good and page 2 is filled.
-            # Only run CSS fixer for layout adjustments. Do NOT re-run Writer.
+        if content_is_good:
+            # Content is proven good (at least one variant scores well).
+            # Do NOT re-run Writer — it destroys proven-good content.
+            # CSS fixer handles layout adjustments including sparse page 2
+            # (by increasing bullet-gap and line-height to spread content).
             _step(f"Content OK (best: {best_score}) — adjusting layout only...", 7 + qa_pass)
         else:
-            # Re-run Writer: either scores are bad, or page 2 needs more bullets.
+            # Both variants score poorly → content may need fixing too.
             fix_instructions = build_qa_fix_instructions(qa_simple, qa_styled)
-
-            if page2_sparse:
-                fix_instructions += (
-                    "\n\nPAGE 2 SPARSE — MUST ADD MORE INDEGENE BULLETS:\n"
-                    "Page 2 (Indegene experience) has significant blank space at the bottom. "
-                    "You MUST add 1-2 additional bullet points to the Indegene experience by "
-                    "finding relevant but currently UNUSED experiences from the knowledge base. "
-                    "Look for projects, initiatives, metrics, or outcomes in the KB that are "
-                    "not yet covered by the existing bullets. Do NOT duplicate existing bullets — "
-                    "find genuinely new material. Do NOT remove or shorten any existing bullets. "
-                    "The goal is <10% blank space at the bottom of page 2."
-                )
-
             if fix_instructions:
                 cumulative_fixes.append(f"--- QA Pass {qa_pass + 1} Feedback ---\n{fix_instructions}")
 

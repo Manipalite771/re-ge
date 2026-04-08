@@ -68,12 +68,28 @@ def generate_css_fixes(qa_simple: dict, qa_styled: dict, current_vars: dict | No
 
     qa_feedback = "\n\n".join(feedback_parts)
 
-    # Call LLM to generate CSS fixes
+    # Check if page 2 is sparse — apply direct spacing fix without waiting for LLM
+    from core.pipeline import _is_page2_sparse
+    if _is_page2_sparse(qa_simple, qa_styled):
+        # Aggressively spread Indegene bullets to fill page 2
+        declarations = [
+            "  --bullet-line-height: 1.55;",
+            "  --bullet-gap: 3pt;",
+            "  --section-gap: 10pt;",
+            "  --role-gap: 8pt;",
+        ]
+        if current_vars is not None:
+            current_vars["--bullet-line-height"] = "1.55"
+            current_vars["--bullet-gap"] = "3pt"
+            current_vars["--section-gap"] = "10pt"
+            current_vars["--role-gap"] = "8pt"
+        return ":root {\n" + "\n".join(declarations) + "\n}"
+
+    # Call LLM to generate CSS fixes for other issues
     prompt = build_css_fixer_prompt(current_vars, qa_feedback)
     try:
         overrides = call_llm_json(prompt, temperature=0.0)
     except Exception:
-        # If LLM returns empty/unparseable response, skip CSS fixes gracefully
         return ""
 
     if not overrides:
@@ -82,11 +98,10 @@ def generate_css_fixes(qa_simple: dict, qa_styled: dict, current_vars: dict | No
     # Build CSS override string
     declarations = []
     for var_name, value in overrides.items():
-        # Validate it's a known variable
         if var_name in DEFAULT_CSS_VARS:
             declarations.append(f"  {var_name}: {value};")
-            # Update current_vars for next iteration
-            current_vars[var_name] = value
+            if current_vars is not None:
+                current_vars[var_name] = value
 
     if not declarations:
         return ""
